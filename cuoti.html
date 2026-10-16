@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agent 面试错题集</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --surface: #1a2332;
+    --surface2: #243044;
+    --text: #e8eef6;
+    --muted: #8b9bb4;
+    --border: #2d3a4f;
+    --s1: #3b82f6;
+    --s1-bg: rgba(59,130,246,.15);
+    --chip: #334155;
+    --link: #60a5fa;
+    --warn: #fbbf24;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    padding: 24px 16px 48px;
+    font-size: 15px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  a.back {
+    display: inline-flex;
+    align-items: center;
+    color: var(--link);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: rgba(96,165,250,.12);
+    border: 1px solid rgba(96,165,250,.25);
+    border-radius: 999px;
+    padding: 4px 12px;
+    margin-bottom: 16px;
+  }
+  a.back:hover { background: rgba(96,165,250,.22); }
+  header { margin-bottom: 28px; }
+  header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  header .sub { color: var(--muted); font-size: 0.95rem; }
+  .section-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  section { margin-bottom: 28px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .card p { color: #c5d0e0; }
+  .card strong { color: var(--text); }
+  .bad {
+    background: rgba(251,191,36,.08);
+    border-left: 3px solid var(--warn);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #e2e8f0;
+  }
+  .bad strong { color: var(--warn); }
+  .cheat-wrap { overflow-x: auto; }
+  table.cheat {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    background: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  table.cheat th {
+    text-align: left;
+    background: var(--surface2);
+    padding: 10px 12px;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+  table.cheat td {
+    padding: 10px 12px;
+    border-top: 1px solid var(--border);
+    vertical-align: top;
+    color: #c5d0e0;
+  }
+  table.cheat td:first-child {
+    font-weight: 600;
+    white-space: nowrap;
+    color: #93c5fd;
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.75rem;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--link); }
+  @media print {
+    body { background: #fff; color: #111; padding: 12px; }
+    .card, table.cheat { background: #fff; border-color: #ddd; }
+    .card p, table.cheat td, .bad { color: #333; }
+    header h1 { color: #111; }
+    table.cheat th { background: #f1f5f9; color: #475569; }
+    table.cheat td:first-child { color: #1d4ed8; }
+    a.back { color: #2563eb; background: #eff6ff; border-color: #93c5fd; }
+    .bad { background: #fffbeb; }
+    header .sub, footer { color: #64748b; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← 14天学习计划</a>
+  <header>
+    <h1>Agent 面试错题集</h1>
+    <p class="sub">陪练规则：答得不好 → 记入本题 + 精简正解。复习时优先翻这里。</p>
+  </header>
+
+  <section>
+    <div class="section-label">D1 · 90 秒项目骨架（定稿可背）</div>
+    <article class="card">
+      <p>我们做的是造价侧的智能报价 + 智能投标。报价要解决询价查价写价繁琐：清单项先定额库匹配，匹配不上再 AI 估价出单——路径相对固定，用 <strong>Workflow</strong>；正则松紧影响精确度与召回，我们用可信度标注把边界讲清，不把整段吹成 Agent。</p>
+      <p>投标才是 Agent：解析招标 Word/PDF 和企业资料，抽风险、技术、地区、工程量，对照乙方承受度、利润、技术匹配、产能与覆盖，动态判断能否接标，再按标书要求生成投标文件。资料进 <strong>Context</strong>，工具解析 → 观察 → 再判断 → 需要时 RAG 按需检索企业资料 → 决策后调用生成工具出标书。</p>
+      <p class="bad"><strong>坏例：</strong>资质曾按固定字数切 chunk，段落被切断，RAG 只拿到半截，模型误判资质不足。定位看召回片段后，改为按标题/段落语义切并加 overlap，资质类整段入库，误判明显下降。</p>
+    </article>
+  </section>
+
+  <section>
+    <div class="section-label">D1 · 易偏点</div>
+    <div class="cheat-wrap">
+      <table class="cheat">
+        <thead>
+          <tr><th>题目</th><th>你的偏法</th><th>精简正解</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Agent vs API</td>
+            <td>只说能 chat 又能 work</td>
+            <td>API=无状态一问一答；Agent=感知→规划→行动→观察→再决策的闭环，直到完成或熔断</td>
+          </tr>
+          <tr>
+            <td>90 秒骨架</td>
+            <td>只讲报价 Workflow / 或只讲 RAG 技术点</td>
+            <td>报价=Workflow；投标=Agent；必须含坏例（现象→定位→解决→效果）</td>
+          </tr>
+          <tr>
+            <td>坏例</td>
+            <td>讲成 chunking 方案介绍</td>
+            <td>先讲翻车现象，再定位/解决/效果</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <p>复习优先翻这里 · <a href="cuoti.md">Markdown 源文件</a> · <a href="index.html">返回学习计划</a></p>
+  </footer>
+</div>
+</body>
+</html>

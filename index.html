@@ -61,6 +61,20 @@
     font-size: 0.78rem;
     color: var(--muted);
   }
+  a.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 14px;
+    background: var(--warn);
+    color: #1a1404;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.88rem;
+    border-radius: 999px;
+    padding: 7px 18px;
+  }
+  a.nav-btn:hover { filter: brightness(1.08); }
+  a.nav-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
   /* ===== Roadmap ===== */
   #overview { margin-bottom: 32px; }
@@ -268,6 +282,7 @@
     .links a { color: #2563eb; border-color: #93c5fd; background: #eff6ff; }
     .stage.s1, .stage.s2, .stage.s3 { background: #f8fafc; }
     header .meta span { background: #f1f5f9; color: #475569; }
+    a.nav-btn { background: #f59e0b; color: #1a1404; }
     table.cheat th { background: #f1f5f9; color: #475569; }
     table.cheat td:first-child { color: #1d4ed8; }
     .task, .quiz, .stage .range, header .sub, footer { color: #64748b; }
@@ -320,6 +335,7 @@
 <header>
   <h1>Agent开发 · 14天学习计划</h1>
   <p class="sub">每天约 2 小时 · 必背 → 任务 → 自测 → 面试鸭补洞 · <b>点任一要点或题目卡片即可翻面</b></p>
+  <a class="nav-btn" href="cuoti.html">错题集</a>
   <div class="meta">
     <span>面试鸭 + 公开面经</span>
     <span>VIP 题解需登录</span>
